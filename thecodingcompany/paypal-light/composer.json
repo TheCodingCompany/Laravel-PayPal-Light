@@ -1,0 +1,19 @@
+{
+    "name": "thecodingcompany/laravel-paypal-light",
+    "type": "library",
+    "description": "Laravel PayPal Light library for Google App Engine",
+    "keywords": ["php","youtube","download"],
+    "homepage": "https://github.com/TheCodingCompany/Laravel-PayPal-Light",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Victor Angelier",
+            "email": "vangelier@hotmail.com",
+            "homepage": "https://www.thecodingcompany.se",
+            "role": "Founder"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.0"
+    }
+}
