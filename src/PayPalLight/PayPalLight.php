@@ -82,7 +82,7 @@ class PayPalLight extends HttpRequest
                 "Accept-Language"   => "en-US"
             ),
             array(
-              "grant_type" => "client_credentials"
+                "grant_type" => "client_credentials"
             )
         );
         if(is_array($tokens)){
@@ -191,6 +191,30 @@ class PayPalLight extends HttpRequest
             }
         }else{
             return false;
+        }
+    }
+    
+    /**
+     * Execute and 'approved' payment
+     * @param type $payment_info
+     */
+    public function execute_payment($payment_info = null){
+        $this->get_tokens();
+        if(is_array($this->token_info)){
+            $response = $this->Post("v1/payments/payment/{$payment_info["paymentId"]}/execute", 
+                array(
+                    "Content-Type"      => "application/json",
+                    "Authorization"     => "Bearer ".$this->token_info["access_token"]
+                ),
+                json_encode(array(
+                    "payer_id" => $input["PayerID"]
+                ))
+            );
+            if(isset($response["state"]) && $response["state"] === "approved"){
+                return $response;
+            }else{
+                return false;
+            }
         }
     }
 }

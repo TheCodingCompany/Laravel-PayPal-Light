@@ -121,7 +121,7 @@ class HttpRequest
        } 
 
        //Debug
-       echo "<pre>".print_r($opts, true)."</pre>";
+       //echo "<pre>".print_r($opts, true)."</pre>";
        //echo $url."<br/>";
 
        //Setup request
