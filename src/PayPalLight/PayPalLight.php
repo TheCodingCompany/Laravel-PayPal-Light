@@ -37,6 +37,18 @@ class PayPalLight extends HttpRequest
      * @var type 
      */
     protected $token_info = null;
+    
+    /**
+     * Request info
+     * @var type 
+     */
+    protected $request_info = array();
+    
+    /**
+     * Personal experience profile
+     * @var type 
+     */
+    protected $experience_profile = "";
 
     /**
      * Construct new PayPal class
@@ -74,10 +86,82 @@ class PayPalLight extends HttpRequest
             )
         );
         if(is_array($tokens)){
-            echo "<pre>".print_r($tokens, true)."</pre>";
+            $this->token_info = $tokens;
         }else{
             //Error
-            echo $tokens;
+            $this->token_info = null;
+        }
+        return $this->token_info;
+    }
+    
+    /**
+     * Set the amount to pay
+     * @param type $amount
+     * @param type $currency USD
+     */
+    public function set_transaction(PayPalTransaction $transaction){
+        if(!isset($this->request_info["transactions"])){
+            $this->request_info["transactions"] = array();
+        }
+        array_push($this->request_info["transactions"], $transaction);
+    }
+    
+    /**
+     * Create the JSON value for the request
+     * @return type
+     */
+    public function toJson(){
+        return json_encode($this->request_info);
+    }
+    
+    /**
+     * Set Return url
+     * @param type $url
+     */
+    public function set_return_url($url){
+        if(!isset($this->request_info["redirect_urls"])){
+            $this->request_info["redirect_urls"] = array();
+        }
+        $this->request_info["redirect_urls"]["return_url"] = $url;
+    }
+    /**
+     * Set Cancel url
+     * @param type $url
+     */
+    public function set_cancel_url($url){
+        if(!isset($this->request_info["redirect_urls"])){
+            $this->request_info["redirect_urls"] = array();
+        }
+        $this->request_info["redirect_urls"]["cancel_url"] = $url;
+    }
+    
+    /**
+     * Set Payer information
+     * @param type $info
+     */
+    public function set_payer_info($info = array()){
+        $this->request_info["payer"]["payer_info"] = $info;
+    }
+    
+    /**
+     * Authorize a PayPal payment
+     * @param JSON $payment_info JSON payment info
+     */
+    public function authorize_paypal($payment_info = null){
+        $this->get_tokens();
+        if(is_array($this->token_info)){
+            //Send a request
+            $response = $this->Post("v1/payments/payment", 
+                array(
+                    "Content-Type"      => "application/json",
+                    "Authorization"     => "Bearer ".$this->token_info["access_token"]
+                ),
+                $payment_info
+            );
+
+            print_r($response);
+        }else{
+            return false;
         }
     }
 }

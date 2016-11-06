@@ -14,8 +14,18 @@ use CodingCompany\PayPal\PayPalLight;
     
 class CreditCardPayment extends PayPalLight
 {
-
+    /**
+     * Construct new Payment
+     */
     public function __construct(){
         parent::__construct();
+    }
+    
+    /**
+     * Set Payer Information
+     * @param type $info
+     */
+    public function set_payer($info = array()){
+        
     }
 }   

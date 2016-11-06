@@ -121,7 +121,7 @@ class HttpRequest
        } 
 
        //Debug
-       //echo "<pre>".print_r($opts, true)."</pre>";
+       echo "<pre>".print_r($opts, true)."</pre>";
        //echo $url."<br/>";
 
        //Setup request
@@ -135,6 +135,7 @@ class HttpRequest
        //If we have an error or not
        if($response === FALSE){
            $error = "<pre>".print_r(error_get_last(), true)."</pre>";
+           $error = "<pre>".print_r($response, true)."</pre>";
            echo $error;
            return $error;
        }else{
