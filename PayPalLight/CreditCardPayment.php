@@ -11,7 +11,7 @@
 namespace PayPalLight
 {   
     
-    class CreditCardPayment extends PayPalLight
+    class CreditCardPayment extends PayPalLight\PayPalLight
     {
         
         public function __construct(){

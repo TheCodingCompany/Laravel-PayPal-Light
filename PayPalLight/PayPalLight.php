@@ -15,7 +15,7 @@ namespace PayPalLight
      * PayPal light class that does work on Google App Engine
      * @package PayPal Light
      */
-    class PayPalLight extends HttpRequest
+    class PayPalLight extends PayPalLight\HttpRequest
     {
 
         /**

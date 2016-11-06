@@ -9,7 +9,7 @@
  * 
  */
 
-include "TheCodingCompany".DIRECTORY_SEPARATOR."auto_load.php";
+include "auto_load.php";
 
 $p = new PayPalLight\PayPalLight(array(
     
