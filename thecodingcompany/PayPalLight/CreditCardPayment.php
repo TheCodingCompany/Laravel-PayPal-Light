@@ -8,21 +8,15 @@
  * @license http://www.apache.org/licenses/GPL-compatibility.html GPL
  * 
  */
-namespace CodingCompany
-{
+namespace PayPalLight
+{   
     
-    /**
-     * HTTP requests without the use of Curl
-     * @package PayPal Light
-     */
-    class HttpRequest
+    class CreditCardPayment extends PayPalLight
     {
         
-        /**
-         * Construct new HttpRequest
-         */
-        public function __construct() {
-            
-        }        
+        public function __construct(){
+            parent::__construct();
+        }
     }
+    
 }

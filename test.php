@@ -9,8 +9,12 @@
  * 
  */
 
-use CodingCompany\PayPalLight;
+include "TheCodingCompany".DIRECTORY_SEPARATOR."auto_load.php";
 
-$p = new PayPalLight();
+$p = new PayPalLight\PayPalLight(array(
+    
+));
 
-$tokens = $p->getTokens();
+$p->set_endpoint("https://api.sandbox.paypal.com");
+
+$tokens = $p->get_tokens();
