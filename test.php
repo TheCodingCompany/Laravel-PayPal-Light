@@ -11,9 +11,8 @@
 
 include "auto_load.php";
 
-$p = new PayPalLight\PayPalLight(array(
-    
-));
+$settings = parse_ini_file("settings.ini");
+$p = new PayPalLight\PayPalLight($settings);
 
 $p->set_endpoint("https://api.sandbox.paypal.com");
 
