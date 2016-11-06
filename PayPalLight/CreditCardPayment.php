@@ -8,15 +8,14 @@
  * @license http://www.apache.org/licenses/GPL-compatibility.html GPL
  * 
  */
-namespace PayPalLight
-{   
+namespace CodingCompany\PayPalLight;
+
+use CodingCompany\PayPalLight\PayPalLight;
     
-    class CreditCardPayment extends PayPalLight\PayPalLight
-    {
-        
-        public function __construct(){
-            parent::__construct();
-        }
+class CreditCardPayment extends PayPalLight
+{
+
+    public function __construct(){
+        parent::__construct();
     }
-    
-}
+}   

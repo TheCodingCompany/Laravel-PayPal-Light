@@ -9,74 +9,75 @@
  * 
  */
 
-namespace PayPalLight
+namespace CodingComapny\PayPalLight;
+
+use CodingCompany\PayPalLight\HttpRequest;
+
+/**
+ * PayPal light class that does work on Google App Engine
+ * @package PayPal Light
+ */
+class PayPalLight extends HttpRequest
 {
+
     /**
-     * PayPal light class that does work on Google App Engine
-     * @package PayPal Light
+     * Set to LIVE for live payments
+     * @var type 
      */
-    class PayPalLight extends HttpRequest
-    {
+    protected $mode = "sandbox";
 
-        /**
-         * Set to LIVE for live payments
-         * @var type 
-         */
-        protected $mode = "sandbox";
-        
-        /**
-         * Client ID and Secret
-         * @var type 
-         */
-        protected $credentials = null;
+    /**
+     * Client ID and Secret
+     * @var type 
+     */
+    protected $credentials = null;
 
-        /**
-         * Holds our Token Info
-         * @var type 
-         */
-        protected $token_info = null;
-        
-        /**
-         * Construct new PayPal class
-         * @param array $credentials Hold our client ID en secret
-         */
-        public function __construct($credentials = array()) {
-            parent::__construct();
-            
-            $this->credentials = $credentials;
-        }
+    /**
+     * Holds our Token Info
+     * @var type 
+     */
+    protected $token_info = null;
 
-        /**
-         * Set our endpoint
-         * @param type $endpoint
-         */
-        public function set_endpoint($endpoint){
-            $this->base_url = $endpoint;
-        }
+    /**
+     * Construct new PayPal class
+     * @param array $credentials Hold our client ID en secret
+     */
+    public function __construct($credentials = array()) {
+        parent::__construct();
 
-        /**
-         * Get PayPal oAuth2 tokens
-         * @return string
-         */
-        public function get_tokens(){
-            //Send a request
-            $tokens = $this->Post("v1/oauth2/token", 
-                array(
-                    "Content-Type"      => "application/x-www-form-urlencoded",
-                    "Authorization"     => "Basic ".base64_encode($this->credentials["client_id"].":".$this->credentials["client_secret"]),
-                    "Accept"            => "application/json",
-                    "Accept-Language"   => "en-US"
-                ),
-                array(
-                  "grant_type" => "client_credentials"
-                )
-            );
-            if(is_array($tokens)){
-                echo "<pre>".print_r($tokens, true)."</pre>";
-            }else{
-                //Error
-                echo $tokens;
-            }
+        $this->credentials = $credentials;
+    }
+
+    /**
+     * Set our endpoint
+     * @param type $endpoint
+     */
+    public function set_endpoint($endpoint){
+        $this->base_url = $endpoint;
+    }
+
+    /**
+     * Get PayPal oAuth2 tokens
+     * @return string
+     */
+    public function get_tokens(){
+        //Send a request
+        $tokens = $this->Post("v1/oauth2/token", 
+            array(
+                "Content-Type"      => "application/x-www-form-urlencoded",
+                "Authorization"     => "Basic ".base64_encode($this->credentials["client_id"].":".$this->credentials["client_secret"]),
+                "Accept"            => "application/json",
+                "Accept-Language"   => "en-US"
+            ),
+            array(
+              "grant_type" => "client_credentials"
+            )
+        );
+        if(is_array($tokens)){
+            echo "<pre>".print_r($tokens, true)."</pre>";
+        }else{
+            //Error
+            echo $tokens;
         }
     }
 }
