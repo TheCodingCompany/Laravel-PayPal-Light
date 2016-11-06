@@ -8,7 +8,7 @@
  * @license http://www.apache.org/licenses/GPL-compatibility.html GPL
  * 
  */
-namespace PayPalLight;
+namespace CodingCompany\PayPal;
     
 /**
  * HTTP requests without the use of Curl

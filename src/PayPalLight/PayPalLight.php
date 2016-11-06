@@ -9,9 +9,9 @@
  * 
  */
 
-namespace PayPalLight;
+namespace CodingCompany\PayPal;
 
-use HttpRequest;
+use CodingCompany\PayPal\HttpRequest;
 
 /**
  * PayPal light class that does work on Google App Engine
