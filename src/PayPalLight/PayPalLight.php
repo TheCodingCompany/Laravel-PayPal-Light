@@ -115,6 +115,32 @@ class PayPalLight extends HttpRequest
     }
     
     /**
+     * Get the Approval URL from the create Payment response
+     * @param type $links
+     */
+    public function get_approval_url($links = array()){
+        foreach($links as $l){
+            if($l["rel"] === "approval_url"){
+                return $l["href"];
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Get the Execute URL from the create Payment response
+     * @param type $links
+     */
+    public function get_execute_url($links = array()){
+        foreach($links as $l){
+            if($l["rel"] === "execute"){
+                return $l["href"];
+            }
+        }
+        return false;
+    }
+    
+    /**
      * Set Return url
      * @param type $url
      */
@@ -159,7 +185,10 @@ class PayPalLight extends HttpRequest
                 $payment_info
             );
 
-            print_r($response);
+            if($response["state"] === "created"){
+                header("Location: ".$this->get_approval_url($response["links"]), true);
+                die();
+            }
         }else{
             return false;
         }

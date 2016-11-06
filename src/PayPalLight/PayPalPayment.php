@@ -38,6 +38,6 @@ class PayPalPayment extends PayPalLight
      * Authorize the payment and redirect the user
      */
     public function authorize_payment(){
-        return $this->authorize_paypal($this->toJson());
-    }
+        $this->authorize_paypal($this->toJson());
+    }    
 }
