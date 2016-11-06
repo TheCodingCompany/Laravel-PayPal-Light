@@ -39,5 +39,31 @@ class PayPalPayment extends PayPalLight
      */
     public function authorize_payment(){
         $this->authorize_paypal($this->toJson());
-    }    
+    }
+    
+    /**
+     * Execute a created payment
+     * @param type $input
+     */
+    public function execute_payment($input = array()){
+        $tokens = $this->get_tokens();
+        if(is_array($tokens)){
+            $response = $this->Post("v1/payments/payment/{$input["paymentId"]}/execute", 
+                array(
+                    "Content-Type"      => "application/json",
+                    "Authorization"     => "Bearer ".$this->token_info["access_token"]
+                ),
+                json_encode(array(
+                    "payer_id" => $input["PayerID"]
+                ))
+            );
+            if(isset($response["state"]) && $response["state"] === "approved"){
+                return $response;
+            }else{
+                echo "<pre>".print_r($response, true)."</pre>";
+                return false;
+            }
+        }
+        echo "<pre>".print_r($tokens, true)."</pre>";
+    }
 }
