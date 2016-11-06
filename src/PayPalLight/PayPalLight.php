@@ -207,7 +207,7 @@ class PayPalLight extends HttpRequest
                     "Authorization"     => "Bearer ".$this->token_info["access_token"]
                 ),
                 json_encode(array(
-                    "payer_id" => $input["PayerID"]
+                    "payer_id" => $payment_info["PayerID"]
                 ))
             );
             if(isset($response["state"]) && $response["state"] === "approved"){
