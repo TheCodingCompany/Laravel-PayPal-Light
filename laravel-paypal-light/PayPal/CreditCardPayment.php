@@ -8,9 +8,7 @@
  * @license http://www.apache.org/licenses/GPL-compatibility.html GPL
  * 
  */
-namespace CodingCompany\PayPal;
-
-use CodingCompany\PayPal\PayPalLight;
+namespace PayPalLight;
     
 class CreditCardPayment extends PayPalLight
 {
